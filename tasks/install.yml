@@ -22,6 +22,15 @@
     group: prometheus
     mode: 0755
 
+- name: Ensure data directory has correct permissions
+  ansible.builtin.file:
+    path: "{{ prometheus_db_dir }}"
+    owner: prometheus
+    group: prometheus
+    modification_time: preserve
+    access_time: preserve
+    recurse: yes
+
 - name: create prometheus configuration directories
   file:
     path: "{{ item }}"
